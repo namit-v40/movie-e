@@ -1,0 +1,466 @@
+{
+	"info": {
+		"_postman_id": "39e71d9e-e57e-4fae-bffb-5fc4bce89e2f",
+		"name": "Seiheki Fans",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20874130"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"guard\": \"user\",\n    \"email\": \"email_178190@example.com\",\n    \"password\": \"salto123@123\"\n}\n// {\n//     \"guard\": \"admin\",\n//     \"email\": \"admin@salto.vn\",\n//     \"password\": \"password\"\n// }\n// {\n//     \"guard\": \"user\",\n//     \"email\": \"test3@example.com\",\n//     \"password\": \"abcd1234\"\n// }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTc3ODQ2OSwiZXhwIjoxNzM5Nzk2NDY5LCJuYmYiOjE3Mzk3Nzg0NjksImp0aSI6IjBNZXFlOWMxblgySW9keW8iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsImd1YXJkIjoidXNlciIsInJvbGUiOiJ1c2VyIiwiZW1haWxfdmVyaWZpZWQiOnRydWV9.dTAuSRl9rbI5jRCIKQB9IE2Az1fhybJUq52DOtFHOoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/me",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTQ0NjE0MiwiZXhwIjoxNzM5NDQ5NzQyLCJuYmYiOjE3Mzk0NDYxNDIsImp0aSI6IjhtbXBSdndWWVFITmRmT0siLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsImd1YXJkIjoidXNlciJ9.zq5H87380IV2lP6amp0qABXBT77deFh5gkAXzn69K6s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTQ0NzE2NywiZXhwIjoxNzM5NDUwNzY3LCJuYmYiOjE3Mzk0NDcxNjcsImp0aSI6IlFkZk5qMDhacmZ2YzdLTXkiLCJzdWIiOiIxIiwicHJ2IjoiYzhlZTFmYzg5ZTc3NWVjNGM3Mzg2NjdlNWJlMTdhNTkwYjZkNDBmYyIsImd1YXJkIjoiYWNjb3VudCJ9.LzJ_cnEfSbDHIBzYgF1Bpfs2qFTCfGYyPZFtXA2KGhE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/refresh",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test8@example.com\",\n    \"password\": \"abcd1234\",\n    \"password_confirmation\": \"abcd1234\",\n    \"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Example",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/example",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"example"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTUxNTU3NiwiZXhwIjoxNzM5NTMzNTc2LCJuYmYiOjE3Mzk1MTU1NzYsImp0aSI6Imt6YnM3dkozdk1wcTY0T04iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJjcmVhdG9yIiwiZ3VhcmQiOiJ1c2VyIn0.8iMroh8kwNxmRO0TQrpXcI91rMfM5VOSsP7zE3kH8_Y",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Creator",
+			"item": [
+				{
+					"name": "Creator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/creator",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"creator"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTUxNTU3NiwiZXhwIjoxNzM5NTMzNTc2LCJuYmYiOjE3Mzk1MTU1NzYsImp0aSI6Imt6YnM3dkozdk1wcTY0T04iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJjcmVhdG9yIiwiZ3VhcmQiOiJ1c2VyIn0.8iMroh8kwNxmRO0TQrpXcI91rMfM5VOSsP7zE3kH8_Y",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/account",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9yZWZyZXNoIiwiaWF0IjoxNzM5NDQ3NDU3LCJleHAiOjE3Mzk0NTEwNTcsIm5iZiI6MTczOTQ0NzQ1NywianRpIjoiZzhFemNIa0hpV3NoUkVOTiIsInN1YiI6IjEiLCJwcnYiOiJjOGVlMWZjODllNzc1ZWM0YzczODY2N2U1YmUxN2E1OTBiNmQ0MGZjIiwiZ3VhcmQiOiJhY2NvdW50In0.21w3bIzX07OpqkqAUcJxKC37RdoWTDOgisJWdGEVwI8",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Media",
+			"item": [
+				{
+					"name": "Upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTQ4NDQ5NywiZXhwIjoxNzM5NDg4MDk3LCJuYmYiOjE3Mzk0ODQ0OTcsImp0aSI6IkZ1bnFvdnpQcWpjU0xqakMiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsImd1YXJkIjoidXNlciJ9.kAL0OBUg21oFzY6pr_ZCdAw92DIARlJkiJMP7D-EaKo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/macbookpro/Downloads/default.png"
+								},
+								{
+									"key": "visibility",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/media",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTczOTQ4NDQ5NywiZXhwIjoxNzM5NDg4MDk3LCJuYmYiOjE3Mzk0ODQ0OTcsImp0aSI6IkZ1bnFvdnpQcWpjU0xqakMiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsImd1YXJkIjoidXNlciJ9.kAL0OBUg21oFzY6pr_ZCdAw92DIARlJkiJMP7D-EaKo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/media/1cb25f16-6e3c-49f5-88e3-a0e6d436f97c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"media",
+								"1cb25f16-6e3c-49f5-88e3-a0e6d436f97c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost/api/v1",
+			"type": "string"
+		}
+	]
+}

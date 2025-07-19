@@ -25,9 +25,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     protected $fillable = [
         'email',
         'password',
+        'user_identify',
         'name',
-        'email_verified_at',
         'phone',
+        'email_verified_at',
         'phone_verified_at',
         'avatar_img',
     ];
@@ -66,37 +67,26 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [
             'guard' => 'user',
-            'role' => $this->role,
             'email_verified' => $this->hasVerifiedEmail(),
         ];
     }
 
-    public function hasRole(string $role): bool
-    {
-        return $this->role === $role;
-    }
-
-    public function creatorRequest()
-    {
-        return $this->hasOne(CreatorRequest::class, 'user_id');
-    }
-
-    public function scopeDetail(Builder $query)
-    {
-        return $query->with([
-            'posts',
-            'posts.bookmarks',
-            'posts.reactions',
-            'posts.reactions.user',
-            'posts.comments',
-            'posts.creator',
-            'posts.tags',
-            'followings',
-            'followers',
-            'bookmarks',
-            'creatorRequest',
-        ]);
-    }
+    // public function scopeDetail(Builder $query)
+    // {
+    //     return $query->with([
+    //         'posts',
+    //         'posts.bookmarks',
+    //         'posts.reactions',
+    //         'posts.reactions.user',
+    //         'posts.comments',
+    //         'posts.creator',
+    //         'posts.tags',
+    //         'followings',
+    //         'followers',
+    //         'bookmarks',
+    //         'creatorRequest',
+    //     ]);
+    // }
 
     public static function generateUserIdentifyByEmail($email)
     {
@@ -106,25 +96,5 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         } while (self::where('user_identify', $identify)->exists());
 
         return $identify;
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'creator_id');
-    }
-
-    public function bookmarks()
-    {
-        return $this->hasMany(PostBookmark::class);
-    }
-
-    public function followings()
-    {
-        return $this->hasMany(Follow::class, 'following_id');
-    }
-
-    public function followers()
-    {
-        return $this->hasMany(Follow::class, 'follower_id');
     }
 }

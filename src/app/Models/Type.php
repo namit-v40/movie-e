@@ -12,14 +12,10 @@ class Type extends Model
 {
     use Filterable, HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    protected $fillable = ['name', 'slug'];
 
     public function movies()
     {
         return $this->hasMany(Movie::class);
     }
-
 }

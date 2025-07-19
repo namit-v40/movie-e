@@ -11,7 +11,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -23,13 +22,13 @@ class RegisterController extends Controller
                 'password' => 'required|string|min:6|confirmed',
             ],
             [
-                'email.unique' => 'This email address is already in use.',
+                'email.unique' => config('constants.message.email_already_exists'),
             ]
         );
 
         $user = User::where('email', $request->email)->first();
         if ($user) {
-            return ApiResponse::error('email_already_exists', Response::HTTP_BAD_REQUEST)->toJson();
+            return ApiResponse::error(config('constants.message.email_already_exists'), Response::HTTP_BAD_REQUEST)->toJson();
         }
 
         $encrypted_password = Hash::make($request->password);
@@ -37,7 +36,6 @@ class RegisterController extends Controller
         $userIdentify = User::generateUserIdentifyByEmail($request->email);
 
         $user = User::create([
-            'role' => User::ROLE_USER,
             'email' => $request->email,
             'password' => $encrypted_password,
             'user_identify' => $userIdentify,
@@ -96,7 +94,7 @@ class RegisterController extends Controller
 
         $verificationUrl = config('app.client_url') . "/email-verification?token={$token}&email={$user->email}";
 
-        Mail::to($user->email)->queue(new VerifyEmail($user, $verificationUrl));
+        Mail::to($user->email)->send(new VerifyEmail($user, $verificationUrl));
 
         return ApiResponse::success([], 'email_verification_link_resent_successfully', Response::HTTP_CREATED)->toJson();
     }

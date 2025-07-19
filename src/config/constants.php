@@ -23,6 +23,7 @@ return [
         'permission_denied' => 'permission_denied',
         'already_exist' => 'already_exist',
         'user_identify_exist' => 'user_identify_exist',
+        'email_already_exists' => 'email_already_exists',
         'fetch_success' => 'fetch_success',
         'fetch_failure' => 'fetch_failure',
         'update_failure' => 'update_failure',

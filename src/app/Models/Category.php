@@ -9,13 +9,10 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    protected $fillable = ['name', 'slug'];
 
     public function movies()
     {
-        return $this->hasMany(Movie::class);
+        return $this->belongsToMany(Movie::class, 'movie_category');
     }
 }

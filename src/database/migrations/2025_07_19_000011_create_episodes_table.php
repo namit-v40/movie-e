@@ -4,12 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateEpisodesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
@@ -19,21 +16,14 @@ return new class extends Migration
             $table->string('link_embed');
             $table->string('link_m3u8');
             $table->string('sort_order');
-            $table->unsignedBigInteger('user_id')->nullable()->index();
-            $table->unsignedBigInteger('movie_id')->nullable()->index();
+            $table->foreignId('movie_id')->constrained()->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('episodes');
     }
-};
+}

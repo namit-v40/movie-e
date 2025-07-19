@@ -5,21 +5,15 @@ namespace App\Models;
 use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class Actor extends Model
 {
     use Filterable, SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    protected $fillable = ['name', 'avatar', 'bio'];
 
     public function movies()
     {
-        return $this->hasMany(Movie::class);
+        return $this->belongsToMany(Movie::class, 'movie_actor');
     }
-
 }

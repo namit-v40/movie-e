@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'code'];
 
     public function movies()
     {

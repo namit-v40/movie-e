@@ -14,10 +14,6 @@ class UserDetailWithCreatorResource extends UserDetailResource
      */
     public function toArray($request)
     {
-        return array_merge(parent::toArray($request), [
-            'followings_count' => $this->followings_count,
-            'followers_count' => $this->followers_count,
-            'posts_count' => $this->posts_count,
-        ]);
+        return array_merge(parent::toArray($request));
     }
 }

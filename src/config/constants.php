@@ -54,7 +54,6 @@ return [
         'bookmark_failed' => 'bookmark_failed',
         'follow_failed' => 'follow_failed',
         'cannot_follow_yourself' => 'cannot_follow_yourself',
-        'webhook_missing_signature_or_timestamp' => 'webhook_missing_signature_or_timestamp',
     ],
     'reaction' => [
         'like' => 'like',

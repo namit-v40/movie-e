@@ -71,22 +71,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         ];
     }
 
-    // public function scopeDetail(Builder $query)
-    // {
-    //     return $query->with([
-    //         'posts',
-    //         'posts.bookmarks',
-    //         'posts.reactions',
-    //         'posts.reactions.user',
-    //         'posts.comments',
-    //         'posts.creator',
-    //         'posts.tags',
-    //         'followings',
-    //         'followers',
-    //         'bookmarks',
-    //         'creatorRequest',
-    //     ]);
-    // }
+    public function scopeDetail(Builder $query)
+    {
+        return $query->with([]);
+    }
 
     public static function generateUserIdentifyByEmail($email)
     {

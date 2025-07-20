@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Admin;
+namespace App\Http\Resources\Country;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserDetailResource extends JsonResource
+class CountryDetailResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,9 @@ class UserDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_identify' => $this->user_identify,
-            'email' => $this->email,
-            'phone' => $this->phone,
             'name' => $this->name,
-            'avatar_img' => $this->avatar_img
+            'slug' => $this->slug,
+            'code' => $this->code
         ];
     }
 }

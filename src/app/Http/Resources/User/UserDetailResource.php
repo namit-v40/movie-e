@@ -16,22 +16,15 @@ class UserDetailResource extends JsonResource
      */
     public function toArray($request)
     {
-        $owner_id = auth()->id();
-        $is_owner = $owner_id === $this->id;
-
         return [
             'id' => $this->id,
             'email' => $this->email,
-            'phone' => $this->phone,
-            'phone_verified_at' => $this->phone_verified_at,
+            'user_identify' => $this->user_identify,
             'name' => $this->name,
+            'phone' => $this->phone,
             'avatar_img' => $this->avatar_img,
-            'total_posts' => $this->posts->where('status', 'success')->where('approval_status', 'approved')->count(),
-            'total_followings' => $this->followers->count(),
-            'total_followers' => $this->followings->count(),
-            'is_following' => $this->followings->where('follower_id', $owner_id)->count() ? true : false,
-            'is_owner' => $is_owner,
-            'latest_post' => new PostCollection($this->posts?->sortByDesc('created_at')?->take(5)),
+            'phone_verified_at' => $this->phone_verified_at,
+            'email_verified_at' => $this->email_verified_at,
         ];
     }
 }

@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Requests\AdminRequest\Country;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+
+class CreateCountryRequest extends FormRequest
+{
+    public function authorize()
+    {
+        return true;
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|unique:countries',
+            'code' => 'required|string|max:10|unique:countries',
+        ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => $this->slug ?? Str::slug($this->name),
+        ]);
+    }
+}

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\API\Admin;
 
-use App\Models\Country;
+use App\Models\Director;
 
 use App\Http\Responses\ApiResponse;
-use App\Http\Requests\AdminRequest\Country\CountryRequest;
-use App\Http\Requests\AdminRequest\Country\CreateCountryRequest;
-use App\Http\Requests\AdminRequest\Country\UpdateCountryRequest;
-use App\Http\Resources\Country\CountryFilterCollection;
-use App\Http\Resources\Country\CountryDetailResource;
+use App\Http\Requests\AdminRequest\Director\DirectorRequest;
+use App\Http\Requests\AdminRequest\Director\CreateDirectorRequest;
+use App\Http\Requests\AdminRequest\Director\UpdateDirectorRequest;
+use App\Http\Resources\Director\DirectorFilterCollection;
+use App\Http\Resources\Director\DirectorDetailResource;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Response;
@@ -17,27 +17,27 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class CountryController extends Controller
+class DirectorController extends Controller
 {
-    public function index(CountryRequest $request): JsonResponse
+    public function index(DirectorRequest $request): JsonResponse
     {
-        $data = Country::select()
+        $data = Director::select()
             ->search($request->search)
-            ->filter($request->only(['name', 'code']))
+            ->filter($request->only(['name']))
             ->sort($request->sort)
             ->paginate($request->per_page ?? config('constants.per_page'));
 
         return ApiResponse::success(
-            new CountryFilterCollection($data),
+            new DirectorFilterCollection($data),
             config('constants.message.fetch_success')
         )->toJson();
     }
 
     public function show($id): JsonResponse
     {
-        $country = Country::where('id', $id)->first();
+        $director = Director::where('id', $id)->first();
 
-        if (is_null($country)) {
+        if (is_null($director)) {
             return ApiResponse::error(
                 config('constants.message.not_found'),
                 Response::HTTP_NOT_FOUND
@@ -45,20 +45,20 @@ class CountryController extends Controller
         }
 
         return ApiResponse::success(
-            new CountryDetailResource($country),
+            new DirectorDetailResource($director),
             config('constants.message.fetch_success')
         )->toJson();
     }
 
-    public function store(CreateCountryRequest $request): JsonResponse
+    public function store(CreateDirectorRequest $request): JsonResponse
     {
         try {
             $data = $request->validated();
 
-            $country = Country::create($data);
+            $director = Director::create($data);
 
             return ApiResponse::success(
-                $country,
+                $director,
                 config('constants.message.create_success')
             )->toJson();
         } catch (\Exception $e) {
@@ -69,11 +69,11 @@ class CountryController extends Controller
         }
     }
 
-    public function update(UpdateCountryRequest $request, $id): JsonResponse
+    public function update(UpdateDirectorRequest $request, $id): JsonResponse
     {
-        $country = Country::where('id', $id)->first();
+        $director = Director::where('id', $id)->first();
 
-        if (is_null($country)) {
+        if (is_null($director)) {
             return ApiResponse::error(
                 config('constants.message.not_found'),
                 Response::HTTP_NOT_FOUND
@@ -82,10 +82,10 @@ class CountryController extends Controller
         try {
             $data = $request->validated();
 
-            $country->update($data);
+            $director->update($data);
 
             return ApiResponse::success(
-                $country,
+                $director,
                 config('constants.message.update_success')
             )->toJson();
         } catch (\Exception $e) {
@@ -98,8 +98,8 @@ class CountryController extends Controller
 
     public function destroy($id): JsonResponse
     {
-        $country = Country::find($id);
-        if (is_null($country)) {
+        $director = Director::where('id', $id)->first();
+        if (is_null($director)) {
             return ApiResponse::error(
                 config('constants.message.not_found'),
                 Response::HTTP_BAD_REQUEST
@@ -107,7 +107,7 @@ class CountryController extends Controller
         }
         try {
             DB::beginTransaction();
-            $country->delete();
+            $director->delete();
             DB::commit();
 
             return ApiResponse::success(

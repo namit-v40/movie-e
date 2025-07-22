@@ -40,10 +40,10 @@ services:
     container_name: movie_e_mysql
     hostname: movie_e_mysql
     volumes:
-      - movie_e_db:/var/lib/mysql
+      - movie_db:/var/lib/mysql
       - ./.infra/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
-      - 3384:3306
+      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=movie_e
@@ -107,7 +107,7 @@ services:
       - movie_e_network
 
 volumes:
-  movie_e_db:
+  movie_db:
     name: movie_e_db
   mailpit_data:
     name: movie_e_mailpit

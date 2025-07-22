@@ -13,6 +13,7 @@ class CreateDirectorsTable extends Migration
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->text('bio')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
